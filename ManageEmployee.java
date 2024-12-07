@@ -1,6 +1,4 @@
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class ManageEmployee {
     static List<Employee> employeeList = new ArrayList<Employee>();
@@ -15,7 +13,8 @@ public class ManageEmployee {
             System.out.println("3. Show information employee.");
             System.out.println("4. Delete employee by Id.");
             System.out.println("5. Calculate Total Salary..");
-            System.out.println("6. Exit.");
+            System.out.println("6. Sort Ascending by name.");
+            System.out.println("7. Exit.");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             scanner.nextLine();
@@ -37,13 +36,16 @@ public class ManageEmployee {
                     calculateTotalSalary();
                     break;
                 case 6:
+                    sortEmployeeByName();
+                    break;
+                case 7:
                     System.out.println("Exit program!");
                     break;
                 default :
                     System.out.println("Invalid choice!");
                     break;
             }
-        } while (choice != 6);
+        } while (choice != 7);
     }
 public static void addEmployee() {
     System.out.print("Enter employee ID: ");
@@ -120,5 +122,13 @@ public static void calculateTotalSalary(){
             totalSalary += employee.getSalary();
         }
         System.out.println("Total salary of all employees: " + totalSalary);
+}
+
+public static void sortEmployeeByName () {
+    employeeList.sort(Comparator.comparing(Employee::getEmployeeName));
+    System.out.println ("List of employees sorted ascending by name: ");
+    for (Employee employee : employeeList) {
+        System.out.println(employee.getEmployeeName());
+    }
 }
 }
